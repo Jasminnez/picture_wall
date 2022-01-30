@@ -3,6 +3,7 @@ import ImageCard from "./components/ImageCard";
 import ImageFilter from "./components/ImageFilter";
 import Modal from './components/Modal';
 import styled from 'styled-components';
+import { LazyLoadComponent } from 'react-lazy-load-image-component';
 
 const Styles = styled.div`
   .wrapper{
@@ -31,9 +32,11 @@ function App() {
         <div className="container mx-auto">
           <h1 className="text-6xl text-center">Picture wall</h1>
           <ImageFilter filterText={(text:any)=> setTerm(text)}/>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-3 gap-4">     
             {images.map(image => (
-              <ImageCard key={image.id} image={image} term={term} setSelectedImg={setSelectedImg}/>
+              <LazyLoadComponent>
+                <ImageCard key={image.id} image={image} term={term} setSelectedImg={setSelectedImg}/>
+              </LazyLoadComponent>
             ))}
           </div>
           {selectedImg && <Modal selectedImg={selectedImg} setSelectedImg={setSelectedImg}/>}
